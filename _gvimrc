@@ -1,0 +1,157 @@
+" PS> cmd /c mklink %HOMEPATH%\_gvimrc %HOMEPATH%\dotfiles\_gvimrc やってね
+
+let $HOME_C='~/dotfiles'  " なんでこれ用意したか覚えてない
+
+set runtimepath^=$HOME_C/vimfiles
+
+" ------------------------------
+"  settings
+" ------------------------------
+set background=light
+set clipboard=unnamed								" クリップボード使用
+set whichwrap=b,s,h,l,<,>,[,]						" カーソルが行頭，行末で止まらないようにする
+set showcmd											" コマンドをステータス行に表示
+set showmode										" 現在のモード表示
+set number											" 行番号
+set noswapfile										" スワップファイルを作らない
+set nobackup										" バックアップファイル作らん
+set noundofile										" undoファイルを作らぬ
+set list											" 不可視文字を表示
+set listchars=tab:>.,trail:_,extends:>,precedes:<	" 不可視文字の表示形式
+set display=uhex									" 印字不可能文字を16進数で表示
+set autoread										" 余所の更新を自動で更新
+set formatoptions=lmoq								" テキスト整形オプション，マルチバイト系を追加
+set clipboard+=unnamed								" OSのクリップボードを使う
+" set encoding=utf-8									" デフォルトエンコーディング
+autocmd GUIEnter * set transparency=180				" 背景透過
+
+" 全角スペースの表示
+highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+match ZenkakuSpace /　/
+
+" ESC2回でハイライト消す
+nmap <ESC><ESC> :nohlsearch<CR><ESC>
+
+" 行末の空白文字をハイライト
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter, WinEnter, ColorScheme * highlight TrailingSpaces term=underline guibg~Red ctermbg=Red
+  autocmd VimEnter, WinEnter * match TrailingSpacese /\s\+$/
+augroup END
+
+" ,の後にスペース挿入
+inoremap , ,<Space>
+
+" 保存時に行末の空白を削除
+autocmd BufWritePre * :%s/\s\+$//ge
+
+" 複数行のインデントを連続で実行
+vnoremap <silent> > >gv
+vnoremap <silent> < <gv
+
+" ターミナルでマウス使用可
+set mouse=a
+set guioptions+=a
+set ttymouse=xterm2
+
+" ---------- インデント ----------
+set cindent  " C言語のインデントに従って自動インデント
+set autoindent  " 有効化
+set smartindent  " 新しい行開始時に，現在と同じだけインデント
+
+" softtabstopはTabキー押し下げ時に挿入される空白の量，0の場合はtabstopと同じ
+set tabstop=4 shiftwidth=4 softtabstop=0  "ts, sw, stsで代用可
+
+if has("autocmd")
+	filetype plugin on  " ファイルタイプの検索を有効化
+	filetype indent on  " ファイルタイプごとのインデント
+
+	autocmd FileType python		setlocal sw=4 sts=0 ts=4 et
+	autocmd FileType html		setlocal sw=2 sts=2 ts=2 et
+endif
+
+set noexpandtab  " ソフトTab(タブの代わりにスペースを入れる)をOFFにする
+
+" ---------- 移動とか ----------
+
+
+" ---------- ステータスライン ----------
+set laststatus=2  " 常時ステータスライン表示
+set ruler  " カーソルの位置情報表示
+
+" 高速端末
+set ttyfast
+
+" コマンド実行中は描画を中断
+set lazyredraw
+
+" ------------------------------
+" easy-motion
+" ------------------------------
+" ジャンプ用キー変更
+let g:EasyMotion_keys='hjklasdfgyuiopqwertnmvcxzbHJKLASDFGYUIOPQWERTNMVCXZB'
+" <Leader>を ; に割当
+let g:EasyMotion_leader_key=';'
+" smartcase 大文字小文字無視
+let g:EasyMotion_smartcase=1
+" 双方向検索 <Leader>なしでs使えるようにした
+nmap s <Plug>(easymotion-s)
+vmap s <Plug>(easymotion-s)
+omap s <Plug>(easymotion-s)
+" JK Motionの変更 先頭列ではなくカレント列
+let g:EasyMotion_startofline=0
+
+
+" ------------------------------
+"  bundle
+" ------------------------------
+" neobundle.vimのマニュアル通り
+" vim起動時のみruntimepathにneobundle.vimを追加
+if has('vim_starting')
+	set nocompatible
+	" set runtimepath+=~/.vim/bundle/neobundle.vim/
+	set runtimepath+=$HOME_C/.vim/bundle/neobundle.vim/
+endif
+
+" neobundle.vimの初期化
+" call neobundle#rc(expand('$HOME_C/.vim/bundle/'))  " 廃止になったはず
+call neobundle#begin(expand('~/dotfiles/.vim/bundle'))
+call neobundle#end()
+" manage
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" 読み込むプラグインを記載
+
+" ファイルタイプ検出，プラグイン/インデントの有効化
+filetype plugin indent on
+
+" 使用するプラグインを書く
+NeoBundle 'thinca/vim-quickrun'
+
+NeoBundle 'Shougo/unite.vim'
+
+" NeoBundle 'itchyny/lightline.vim'
+" set t_Co=256
+
+" vim-easymotion
+NeoBundle 'haya14busa/vim-easymotion'
+
+" vim-powerline
+" NeoBundle 'Lokaltog/vim-powerline'
+
+" jedi-vim
+NeoBundle 'davidhalter/jedi-vim'
+
+" unite.vim
+NeoBundle 'Shougo/unite.vim'
+
+filetype plugin indent on
+
+NeoBundleCheck
+
+
+" ------------------------------
+"  colors
+" ------------------------------
+" dotfiles/vimfiles/colors にcolorscheme置いておく
+colorscheme shitakeRainbow
