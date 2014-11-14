@@ -51,3 +51,12 @@ NeoBundle 'Shougo/unite.vim'
 filetype plugin indent on
 
 NeoBundleCheck
+
+
+" ------------------------------
+" vim-lightline
+" ------------------------------
+" colorscheme
+let g:lightline = {
+      \ 'colorscheme': 'solarized'
+      \ }
