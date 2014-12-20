@@ -43,6 +43,9 @@ set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
 
+" Cnt + j でESC
+inoremap <C-j> <esc>
+
 " ---------- インデント ----------
 set autoindent  " 有効化
 set smartindent  " 新しい行開始時に，現在と同じだけインデント
@@ -88,5 +91,12 @@ vmap s <Plug>(easymotion-s)
 omap s <Plug>(easymotion-s)
 " JK Motionの変更 先頭列ではなくカレント列
 let g:EasyMotion_startofline=0
+
+" ------------------------------
+" lightline.vim
+" ------------------------------
+let g:lightline = {
+			\ 'colorscheme': 'solarized'
+			\ }
 
 filetype plugin on  " ファイルタイプ判定on

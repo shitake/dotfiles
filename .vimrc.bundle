@@ -58,7 +58,10 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'haya14busa/vim-easymotion'
 
 " vim-powerline
-NeoBundle 'Lokaltog/vim-powerline'
+" NeoBundle 'Lokaltog/vim-powerline'
+
+" lightline.vim
+NeoBundle 'itchyny/lightline.vim'
 
 " jedi-vim
 NeoBundle 'davidhalter/jedi-vim'
