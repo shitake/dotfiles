@@ -25,6 +25,12 @@ set clipboard+=unnamed								" OSのクリップボードを使う
 " set encoding=utf-8									" デフォルトエンコーディング
 autocmd GUIEnter * set transparency=180				" 背景透過
 
+" ESCを別のキーへ割り当て
+inoremap <silent> jj <ESC>
+inoremap <C-j> <ESC>
+noremap <C-j> <ESC>
+vnoremap <C-j> <ESC>
+
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
