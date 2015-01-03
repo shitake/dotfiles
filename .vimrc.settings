@@ -21,6 +21,12 @@ match ZenkakuSpace /　/
 " ESC2回でハイライト消す
 nmap <ESC><ESC> :nohlsearch<CR><ESC>
 
+" ESCを別のキーへ割り当て
+inoremap <silent> jj <ESC>
+inoremap <C-j> <ESC>
+noremap <C-j> <ESC>
+vnoremap <C-j> <ESC>
+
 " 行末の空白文字をハイライト
 augroup HighlightTrailingSpaces
   autocmd!
@@ -42,9 +48,6 @@ vnoremap <silent> < <gv
 set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
-
-" Cnt + j でESC
-inoremap <C-j> <esc>
 
 " ---------- インデント ----------
 set autoindent  " 有効化
