@@ -11,7 +11,7 @@ colors
 #     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] &&
 #         PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
 #     ;;
-# 
+#
 # *)
 
 # ------------------------------
@@ -111,12 +111,14 @@ alias where="command -v"
 # ls
 case "${OSTYPE}" in
 freebsd*|darwin*)
-    alias ls="ls -alG"
+    alias ls="ls -G"
+    # alias ls="ls -alG"
     zle -N expand-to-home-or-insert
     bindkey "@"  expand-to-home-or-insert
     ;;
 linux*)
-    alias la="ls -al"
+    alias la="ls -G"
+    # alias la="ls -al"
     ;;
 esac
 
