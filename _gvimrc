@@ -21,9 +21,9 @@ set listchars=tab:>.,trail:_,extends:>,precedes:<	" 不可視文字の表示形�
 set display=uhex									" 印字不可能文字を16進数で表示
 set autoread										" 余所の更新を自動で更新
 set formatoptions=lmoq								" テキスト整形オプション，マルチバイト系を追加
-set clipboard+=unnamed								" OSのクリップボードを使う
 " set encoding=utf-8									" デフォルトエンコーディング
-autocmd GUIEnter * set transparency=180				" 背景透過
+" autocmd GUIEnter * set transparency=180				" 背景透過
+autocmd GUIEnter * set transparency=210				" 背景透過
 
 " ESCを別のキーへ割り当て
 inoremap <silent> jj <ESC>
@@ -96,4 +96,4 @@ set lazyredraw
 "  colors
 " ------------------------------
 " dotfiles/vimfiles/colors にcolorscheme置いておく
-colorscheme shitakeRainbow
+colorscheme molokai
