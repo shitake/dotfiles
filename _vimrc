@@ -48,6 +48,18 @@ NeoBundle 'davidhalter/jedi-vim'
 " unite.vim
 NeoBundle 'Shougo/unite.vim'
 
+" vimshell.vim
+NeoBundle 'Shougo/vimshell.vim'
+
+" vim-markdown
+NeoBundle 'plasticboy/vim-markdown'
+
+" previm
+NeoBundle 'kannokanno/previm'
+
+" open-browser.vim
+NeoBundle 'tyru/open-browser.vim'
+
 filetype plugin indent on
 
 NeoBundleCheck
@@ -75,3 +87,11 @@ let g:EasyMotion_startofline=0
 let g:lightline = {
       \ 'colorscheme': 'solarized'
       \ }
+
+" ------------------------------
+" previm
+" ------------------------------
+augroup PrevimSettings
+	autocmd!
+	autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
