@@ -48,9 +48,9 @@ hi Cursor		  guifg=bg guibg=Green  " G
 hi CursorColumn	  term=underline  guibg=#555555 cterm=underline  " G
 hi Error		  term=reverse ctermfg=darkcyan  ctermbg=black  guifg=darkcyan guibg=black
 hi Todo			  term=standout  ctermfg=black ctermbg=darkcyan  guifg=black  guibg=darkcyan
-hi TabLine		  term=bold,reverse  cterm=bold ctermfg=lightblue ctermbg=white gui=bold guifg=lightblue guibg=white
-hi TabLineFill	  term=bold,reverse  cterm=bold ctermfg=lightblue ctermbg=white gui=bold guifg=lightblue guibg=white
-hi TabLineSel	  term=reverse ctermfg=white ctermbg=lightblue guifg=white guibg=lightblue
+hi TabLine		  term=bold,reverse  cterm=bold ctermfg=lightblue ctermbg=white gui=bold guifg=lightgreen guibg=white
+hi TabLineFill	  term=bold,reverse  cterm=bold ctermfg=lightblue ctermbg=white gui=bold guifg=lightred guibg=white
+hi TabLineSel	  term=reverse ctermfg=white ctermbg=lightblue guifg=white guibg=lightmagenta
 
 hi link IncSearch		Visual  " インクリメンタル中の選択文字
 hi link String			Constant
