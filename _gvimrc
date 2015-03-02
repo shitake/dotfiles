@@ -22,8 +22,7 @@ set display=uhex									" 印字不可能文字を16進数で表示
 set autoread										" 余所の更新を自動で更新
 set formatoptions=lmoq								" テキスト整形オプション，マルチバイト系を追加
 " set encoding=utf-8									" デフォルトエンコーディング
-" autocmd GUIEnter * set transparency=180				" 背景透過
-autocmd GUIEnter * set transparency=210				" 背景透過
+autocmd GUIEnter * set transparency=180				" 背景透過
 
 " ESCを別のキーへ割り当て
 inoremap <silent> jj <ESC>
@@ -59,6 +58,15 @@ vnoremap <silent> < <gv
 set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
+
+" prefix key
+nnoremap [Tag] <Nop>
+nmap t [Tag]
+
+" タブ切り替え
+nnoremap <silent> [Tag]c :tablast <bar> tabnew<CR>  " tc で新しいタブを一番右へ作成
+nnoremap <silent> [Tag]n :tabnext<CR>  " tn 次のタブへ
+nnoremap <silent> [Tag]p :tabprevious<CR>  " tp 前のタブへ
 
 " ---------- インデント ----------
 set cindent  " C言語のインデントに従って自動インデント
@@ -96,4 +104,4 @@ set lazyredraw
 "  colors
 " ------------------------------
 " dotfiles/vimfiles/colors にcolorscheme置いておく
-colorscheme molokai
+colorscheme shitakeRainbow
