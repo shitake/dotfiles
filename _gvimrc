@@ -68,6 +68,12 @@ nnoremap <silent> [Tag]c :tablast <bar> tabnew<CR>  " tc で新しいタブを�
 nnoremap <silent> [Tag]n :tabnext<CR>  " tn 次のタブへ
 nnoremap <silent> [Tag]p :tabprevious<CR>  " tp 前のタブへ
 
+" 画面移動
+nnoremap <silent> [Tag]h <C-w>h
+nnoremap <silent> [Tag]j <C-w>j
+nnoremap <silent> [Tag]k <C-w>k
+nnoremap <silent> [Tag]l <C-w>l
+
 " ---------- インデント ----------
 set cindent  " C言語のインデントに従って自動インデント
 set autoindent  " 有効化
