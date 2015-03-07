@@ -74,6 +74,13 @@ nnoremap <silent> [Tag]j <C-w>j
 nnoremap <silent> [Tag]k <C-w>k
 nnoremap <silent> [Tag]l <C-w>l
 
+" コメントの自動挿入を無効
+augroup auto_comment_off
+	autocmd!
+	autocmd BufEnter * setlocal formatoptions-=r
+	autocmd BufEnter * setlocal formatoptions-=o
+augroup END
+
 " ---------- インデント ----------
 set cindent  " C言語のインデントに従って自動インデント
 set autoindent  " 有効化
@@ -88,6 +95,8 @@ if has("autocmd")
 
 	autocmd FileType python		setlocal sw=4 sts=0 ts=4 et
 	autocmd FileType html		setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType css		setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
 endif
 
 set noexpandtab  " ソフトTab(タブの代わりにスペースを入れる)をOFFにする
