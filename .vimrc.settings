@@ -1,6 +1,5 @@
 set clipboard=unnamed								" クリップボード使用
-set whichwrap=b,s,h,l,<,>,[,]						" カーソルが行頭，行末で止まらないようにする
-set showcmd											" コマンドをステータス行に表示
+set whichwrap=b,s,h,l,<,>,[,]						" カーソルが行頭，行末で止まらないようにする set showcmd											" コマンドをステータス行に表示
 set showmode										" 現在のモード表示
 set number											" 行番号
 set noswapfile										" スワップファイルを作らない
@@ -12,7 +11,12 @@ set display=uhex									" 印字不可能文字を16進数で表示
 set autoread										" 余所の更新を自動で更新
 set formatoptions=lmoq								" テキスト整形オプション，マルチバイト系を追加
 set clipboard+=unnamed								" OSのクリップボードを使う
+set ffs=unix,dos,mac								" 改行文字
 set encoding=utf-8									" デフォルトエンコーディング
+set scrolloff=5										" スクロール時の余白確保
+set ignorecase										" 大文字小文字無視
+set smartcase										" 検索文字列に大文字が含まれている場合は区別
+set incsearch										" インクリメンタルサーチ
 
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -49,9 +53,17 @@ set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
 
+" コメントの自動挿入を無効
+augroup auto_comment_off
+	autocmd!
+	autocmd BufEnter * setlocal formatoptions-=r
+	autocmd BufEnter * setlocal formatoptions-=o
+augroup END
+
 " ---------- インデント ----------
 set autoindent  " 有効化
 set smartindent  " 新しい行開始時に，現在と同じだけインデント
+set cindent
 
 " softtabstopはTabキー押し下げ時に挿入される空白の量，0の場合はtabstopと同じ
 set tabstop=4 shiftwidth=4 softtabstop=0  "ts, sw, stsで代用可
@@ -60,11 +72,13 @@ if has("autocmd")
 	filetype plugin on  " ファイルタイプの検索を有効化
 	filetype indent on  " ファイルタイプごとのインデント
 
-	autocmd FileType python		setlocal sw=4 sts=0 ts=4 et
+	autocmd FileType python		setlocal sw=4 sts=4 ts=4 et  " sts=0 から 4にした
 	autocmd FileType html		setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType css		setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
 endif
 
-set noexpandtab  " ソフトTab(タブの代わりにスペースを入れる)をOFFにする
+" set noexpandtab  " ソフトTab(タブの代わりにスペースを入れる)をOFFにする
 
 " ---------- 移動とか ----------
 
@@ -101,5 +115,13 @@ let g:EasyMotion_startofline=0
 let g:lightline = {
 			\ 'colorscheme': 'solarized'
 			\ }
+
+" ------------------------------
+" previm
+" ------------------------------
+augroup PrevimSettings
+	autocmd!
+	autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
 
 filetype plugin on  " ファイルタイプ判定on
