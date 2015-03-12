@@ -9,7 +9,7 @@ endif
 
 let g:colors_name = "shitakeDarkPastel"
 
-" エラーメッセージ gui未対応(以下G)
+" gui未対応(以下G)
 
 " :help group-name 参照
 hi Normal		  guifg=white  guibg=#3C3C3C gui=bold
