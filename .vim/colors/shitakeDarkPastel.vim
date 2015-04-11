@@ -11,14 +11,14 @@ let g:colors_name = "shitakeDarkPastel"
 
 " :help group-name 参照
 
-hi Normal                   ctermfg=15 ctermbg=234 guifg=#FFFFFF guibg=#3C3C3C
+hi Normal                   ctermfg=15 ctermbg=16 guifg=#FFFFFF guibg=#3C3C3C
 hi NonText          term=bold      cterm=bold ctermfg=11 gui=bold guifg=#000099  " EOF以降の~とか
-hi Comment          term=bold                 ctermfg=149  guifg=#AED091  " コメント
+hi Comment          term=bold                 ctermfg=150  guifg=#AED091  " コメント
 hi Constant          term=underline cterm=bold ctermfg=184 gui=bold guifg=#E1DF63  " 定数
-hi Number          term=bold      cterm=bold ctermfg=110 gui=bold guifg=#90BEC9  " 数値
-hi String          term=bold      cterm=bold ctermfg=229 gui=bold guifg=#EAE890  " 文字列
+hi Number          term=bold      cterm=bold ctermfg=116 gui=bold guifg=#90BEC9  " 数値
+hi String          term=bold      cterm=bold ctermfg=228 gui=bold guifg=#EAE890  " 文字列
 hi Boolean          term=bold      cterm=bold ctermfg=215 gui=bold guifg=#FFB366  " ブール値
-hi Special          term=bold      cterm=bold ctermfg=140 gui=bold guifg=#C39EC3  " 特殊記号 () {} , とか
+hi Special          term=bold      cterm=bold ctermfg=183 gui=bold guifg=#C39EC3  " 特殊記号 () {} , とか
 hi Operator                         ctermfg=80             guifg=#5fd7d7  " 演算子
 hi Identifier      term=underline ctermfg=175 gui=bold guifg=#EBA3A3  " 関数，識別子
 hi Statement      term=bold      cterm=bold ctermfg=206 gui=bold guifg=#ff87d7  " 命令，分岐
@@ -26,13 +26,13 @@ hi PreProc          term=underline ctermfg=215   guifg=#ffaf5f  " プリプロ�
 hi Type              term=underline cterm=bold ctermfg=13  gui=bold  guifg=#F788A3  " クラス，構造体 C G
 
 hi ErrorMsg          term=standout  cterm=bold ctermfg=3  ctermbg=199  guifg=yellow  guibg=#ff00af
-hi MoreMsg          term=bold cterm=bold ctermfg=115 ctermbg=10 gui=bold guifg=black guibg=SeaGreen  " -- 継続 -- C G
+hi MoreMsg          term=bold cterm=bold ctermfg=122 ctermbg=22 gui=bold guifg=black guibg=SeaGreen  " -- 継続 -- C G
 hi ModeMsg          term=bold cterm=bold ctermfg=119 ctermbg=16 gui=bold guifg=lightgreen guibg=black  " -- 挿入 --, -- ビジュアル行 --
 hi Question          term=standout  cterm=bold  ctermfg=190 gui=bold  guifg=#d7ff00  " プロンプトのメッセージ
 
-hi Visual                                     ctermbg=16 guibg=black " 選択
+hi Visual                           ctermfg=51  ctermbg=239 guibg=black " 選択
 hi Search          cterm=NONE ctermfg=16 ctermbg=116 guifg=black  guibg=lightblue  " 検索
-hi MatchParen      term=reverse  ctermfg=16 ctermbg=124 guifg=#000000 guibg=#af005f  " 対応する括弧
+hi MatchParen      term=reverse  ctermfg=16 ctermbg=199 guifg=#000000 guibg=#af005f  " 対応する括弧
 
 hi Scrollbar      guifg=darkcyan guibg=cyan  " C G
 hi Menu              guifg=black guibg=seagreen  " C G
