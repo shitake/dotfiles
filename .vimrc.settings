@@ -1,7 +1,8 @@
-set runtimepath^=~/dotfiles/.vim
+set runtimepath^=~/dotfiles/vimfiles
 
 set clipboard=unnamed                               " クリップボード使用
-set whichwrap=b,s,h,l,<,>,[,]                       " カーソルが行頭，行末で止まらないようにする set showcmd                                            " コマンドをステータス行に表示
+set whichwrap=b,s,h,l,<,>,[,]                       " カーソルが行頭，行末で止まらないようにする
+set showcmd                                         " コマンドをステータス行に表示
 set showmode                                        " 現在のモード表示
 set number                                          " 行番号
 set noswapfile                                      " スワップファイルを作らない
@@ -74,11 +75,12 @@ if has("autocmd")
     filetype plugin on  " ファイルタイプの検索を有効化
     filetype indent on  " ファイルタイプごとのインデント
 
-    autocmd FileType python        setlocal sw=4 sts=4 ts=4 et  " sts=0 から 4にした
-    autocmd FileType html        setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType python     setlocal sw=4 sts=4 ts=4 et  " sts=0 から 4にした
+    autocmd FileType html       setlocal sw=2 sts=2 ts=2 et
     autocmd FileType css        setlocal sw=2 sts=2 ts=2 et
     autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType ruby        setlocal sw=2 sts=2 ts 2 et
+    autocmd FileType ruby       setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType eruby      setlocal sw=2 sts=2 ts=2 et
 endif
 
 " set noexpandtab  " ソフトTab(タブの代わりにスペースを入れる)をOFFにする
@@ -117,8 +119,100 @@ let g:EasyMotion_startofline=0
 " lightline.vim
 " ------------------------------
 let g:lightline = {
-            \ 'colorscheme': 'solarized'
+            \ 'colorscheme': 'solarized',
+            \ 'mode_map': {'c': 'NORMAL'},
+            \ 'active': {
+            \   'left': [
+            \     ['mode', 'paste'],
+            \     ['fugitive', 'gitgutter', 'filename'],
+            \   ],
+            \   'right': [
+            \     ['lineinfo', 'syntastic'],
+            \     ['percent'],
+            \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
+            \   ]
+            \ },
+            \ 'component_function': {
+            \   'modified': 'MyModified',
+            \   'readonly': 'MyReadonly',
+            \   'fugitive': 'MyFugitive',
+            \   'filename': 'MyFilename',
+            \   'fileformat': 'MyFileformat',
+            \   'filetype': 'MyFiletype',
+            \   'fileencoding': 'MyFileencoding',
+            \   'mode': 'MyMode',
+            \   'syntastic': 'SyntasticStatuslineFlag',
+            \   'charcode': 'MyCharCode',
+            \   'gitgutter': 'MyGitGutter',
+            \ },
+            \ 'separator': {'left': "\u2b80", 'right': "\u2b82"},
+            \ 'subseparator': {'left': "\u2b81", 'right': "\u2b83"}
             \ }
+
+function! MyModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? substitute(b:vimshell.current_dir,expand('~'),'~','') :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  try
+    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+      let _ = fugitive#head()
+      return strlen(_) ? '⭠ '._ : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! MyFileformat()
+  return winwidth('.') > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+  return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+  return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+  return winwidth('.') > 60 ? lightline#mode() : ''
+endfunction
+
+function! MyGitGutter()
+  if ! exists('*GitGutterGetHunkSummary')
+        \ || ! get(g:, 'gitgutter_enabled', 0)
+        \ || winwidth('.') <= 90
+    return ''
+  endif
+  let symbols = [
+        \ g:gitgutter_sign_added . ' ',
+        \ g:gitgutter_sign_modified . ' ',
+        \ g:gitgutter_sign_removed . ' '
+        \ ]
+  let hunks = GitGutterGetHunkSummary()
+  let ret = []
+  for i in [0, 1, 2]
+    if hunks[i] > 0
+      call add(ret, symbols[i] . hunks[i])
+    endif
+  endfor
+  return join(ret, ' ')
+endfunction
 
 " ------------------------------
 " previm
