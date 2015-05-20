@@ -67,6 +67,9 @@ autocmd BufWritePre * :%s/\s\+$//ge
 vnoremap <silent> > >gv
 vnoremap <silent> < <gv
 
+" Shift-Tab で unindent
+imap <S-Tab> <C-o><<
+
 " ターミナルでマウス使用可
 set mouse=a
 set guioptions+=a
