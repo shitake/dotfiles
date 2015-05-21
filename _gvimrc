@@ -68,7 +68,7 @@ vnoremap <silent> > >gv
 vnoremap <silent> < <gv
 
 " Shift-Tab で unindent
-imap <S-Tab> <C-o><<
+inoremap <S-Tab> <C-o><<
 
 " ターミナルでマウス使用可
 set mouse=a
@@ -116,14 +116,15 @@ if has("autocmd")
   autocmd FileType html      setlocal sw=2 sts=2 ts=2 et
   autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
   autocmd FileType markdown  setlocal sw=2 sts=2 ts=2 et
-  autocmd FileType R setlocal sw=2 sts=2 ts=2
+  autocmd FileType r setlocal sw=2 sts=2 ts=2 et
 endif
 
 set expandtab
 " set noexpandtab  " ソフトTab(タブの代わりにスペースを入れる)をOFFにする
 
 " ---------- 移動とか ----------
-
+nnoremap j gj
+nnoremap k gk
 
 " ---------- ステータスライン ----------
 set laststatus=2  " 常時ステータスライン表示
