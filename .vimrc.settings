@@ -56,6 +56,21 @@ set mouse=a
 set guioptions+=a
 set ttymouse=xterm2
 
+" prefix key
+nnoremap [Tag] <Nop>
+nmap t [Tag]
+
+" タブ切り替え
+nnoremap <silent> [Tag]c :tablast <bar> tabnew<CR>  " tc で新しいタブを一番右へ作成
+nnoremap <silent> [Tag]n :tabnext<CR>               " tn 次のタブへ
+nnoremap <silent> [Tag]p :tabprevious<CR>           " tp 前のタブへ
+
+" 画面移動
+nnoremap <silent> [Tag]h <C-w>h
+nnoremap <silent> [Tag]j <C-w>j
+nnoremap <silent> [Tag]k <C-w>k
+nnoremap <silent> [Tag]l <C-w>l
+
 " コメントの自動挿入を無効
 augroup auto_comment_off
     autocmd!
@@ -68,6 +83,9 @@ set autoindent  " 有効化
 set smartindent  " 新しい行開始時に，現在と同じだけインデント
 set cindent
 
+" Shift-Tab で unindent
+inoremap <S-Tab> <C-o><<
+
 " softtabstopはTabキー押し下げ時に挿入される空白の量，0の場合はtabstopと同じ
 set tabstop=4 shiftwidth=4 softtabstop=0  "ts, sw, stsで代用可
 
@@ -78,6 +96,7 @@ if has("autocmd")
     autocmd FileType python     setlocal sw=4 sts=4 ts=4 et  " sts=0 から 4にした
     autocmd FileType html       setlocal sw=2 sts=2 ts=2 et
     autocmd FileType css        setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType scss       setlocal sw=2 sts=2 ts=2 et
     autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
     autocmd FileType ruby       setlocal sw=2 sts=2 ts=2 et
     autocmd FileType eruby      setlocal sw=2 sts=2 ts=2 et
@@ -87,7 +106,8 @@ endif
 set expandtab
 
 " ---------- 移動とか ----------
-
+nnoremap j gj
+nnoremap k gk
 
 " ---------- ステータスライン ----------
 set laststatus=2  " 常時ステータスライン表示
