@@ -100,6 +100,7 @@ if has("autocmd")
     autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
     autocmd FileType ruby       setlocal sw=2 sts=2 ts=2 et
     autocmd FileType eruby      setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
 endif
 
 " set noexpandtab  " ソフトTab(タブの代わりにスペースを入れる)をOFFにする
@@ -241,5 +242,29 @@ augroup PrevimSettings
     autocmd!
     autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
+
+" ------------------------------
+" previm
+" ------------------------------
+let g:rsenseHome = '/usr/local/lib/rsense-0.3'
+let g:rsenseUseOmniFunc = 1
+
+" ------------------------------
+" neocomplete.vim
+" ------------------------------
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+  endif
+  let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
+
+" ------------------------------
+" vim-coffee-script
+" ------------------------------
+autocmd BufRead, BufNewFile, BufReadPre *.coffee set filetype=coffee
+autocmd BufWritePost *.coffee silent make!
+nnoremap <silent> <C-C> :CoffeeCompile vert <CR><C-w>h
 
 filetype plugin on  " ファイルタイプ判定on

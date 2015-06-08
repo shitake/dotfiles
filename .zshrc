@@ -104,7 +104,7 @@ function cwaf() {
 # ------------------------------
 # alias
 # ------------------------------
-setopt complete_aliases     # aliased ls needs if file/dir completions work
+setopt complete_aliases  # aliased ls needs if file/dir completions work
 
 alias where="command -v"
 
@@ -114,7 +114,7 @@ freebsd*|darwin*)
     alias ls="ls -G"
     # alias ls="ls -alG"
     zle -N expand-to-home-or-insert
-    bindkey "@"  expand-to-home-or-insert
+    # bindkey "@"  expand-to-home-or-insert
     ;;
 linux*)
     alias la="ls -G"
@@ -126,7 +126,6 @@ esac
 autoload -U compinit
 compinit
 
-# 20130227追記
 # 入力時に大文字小文字を区別せず補完
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|{-_.}=**'
 
@@ -135,10 +134,28 @@ source ~/.pythonbrew/etc/bashrc
 # ------------------------------
 # utility
 # ------------------------------
-alias ql='qlmanage -p "$@" >& /dev/null'    # quicklook
-alias wifi='sh $HOME/Documents/shellscripts/wifi.sh' # 無線LANのスキャン
+alias ql='qlmanage -p "$@" >& /dev/null'  # quicklook
+alias wifi='sh $HOME/Documents/shellscripts/wifi.sh'  # 無線LANのスキャン
 alias ctags='/usr/local/bin/ctags'  # homebrewで入れたctagsへのエイリアスのはず
 
 # vimらの
 alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim' $@
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim' $@
+
+export RBENV_ROOT=/usr/local/var/rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+
+export PYENV_ROOT="${HOME}/.pyenv"
+if [ -d "${PYENV_ROOT}" ]; then
+    export PATH=${PYENV_ROOT}/bin:$PATH
+    eval "$(pyenv init -)"
+fi
+if which pyenv > /dev/null; then
+    export PYENV_ROOT="${HOME}/.pyenv"
+    export PATH=${PYENV_ROOT}/shims:${PATH}
+    eval "$(pyenv init -)";
+fi
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export PATH=$HOME/.nodebrew/current/bin:$PATH
