@@ -1,0 +1,83 @@
+[
+		{
+			"keys": ["t", "n"],
+			"command": "next_view",
+			"context":
+			[
+				{ "key": "setting.is_widget", "operand": false },
+				{ "key": "setting.command_mode" }
+			]
+		},
+		{
+			"keys": ["t", "p"],
+			"command": "prev_view",
+			"context":
+			[
+				{ "key": "setting.is_widget", "operand": false },
+				{ "key": "setting.command_mode" }
+			]
+		},
+		{
+			"keys": ["j", "j"],
+			"command": "exit_insert_mode",
+			"context":
+			[
+				{ "key": "setting.is_widget", "operand": false },
+				{ "key": "setting.command_mode", "operand": false }
+			]
+		},
+		{
+			"keys": ["ctrl+alt+j"],
+			"command": "select_lines", 
+			"args": { "forward": true }
+		},
+		{
+			"keys": ["ctrl+alt+k"],
+			"command": "select_lines", 
+			"args": { "forward": false }
+		},
+	{
+        "keys": ["s", "p"], "command": "simple_clone",
+        "args":
+        {
+            "location": "right",
+        },
+        "context":
+        [
+            { "key": "simpleclone_keymap_enabled.right" },
+            { "key": "setting.command_mode" },
+        ]
+    },
+    {
+        "keys": ["v", "s"], "command": "simple_clone",
+        "args":
+        {
+            "location": "down",
+        },
+        "context":
+        [
+            { "key": "simpleclone_keymap_enabled.down" },
+            { "key": "setting.command_mode" },
+        ]
+    },
+    {
+        "keys": ["t", "l"],
+        "command": "focus_neighboring_group",
+        "context":
+        [
+            { "key": "simpleclone_keymap_enabled.down" },
+            { "key": "setting.command_mode" },
+        ]
+    },
+    {
+        "keys": ["t", "h"],
+        "command": "focus_neighboring_group",
+        "args": {"forward": false},
+        "context":
+        [
+            { "key": "simpleclone_keymap_enabled.down" },
+            { "key": "setting.command_mode" },
+        ]
+    },
+
+]
