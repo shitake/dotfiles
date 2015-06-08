@@ -1,0 +1,37 @@
+{
+    "color_scheme": "Packages/User/ShitakeDarkPastel.tmTheme",
+    "theme": "Cobalt2.sublime-theme",
+    "font_size": 11,
+    "ignored_packages":
+    [
+    ],
+
+    // 
+    // サイドバーのフォルダ名を太字
+    "bold_folder_labels": true,
+
+    // ミニマップの枠
+    "draw_minimap_border": true,
+
+    // スペース可視化
+    "draw_white_space": "all",
+    // 全角スペースハイライト
+    "trailing_spaces_regexp": "　|[ \t]+",
+    "trailing_spaces_highlight_color": "comment",
+
+    // カーソルの明滅表示方法
+    "caret_style": "blink",
+
+    // カレント行ハイライト
+    "highlight_line": true,
+
+    "match_brackets_angle": true,
+
+    // タブをスペーｽで表示
+    "translate_tabs_to_spaces": true,
+
+    "vintage_ctrl_keys": true,
+    "vintage_start_in_command_mode": true,
+
+    "word_wrap": true
+}
