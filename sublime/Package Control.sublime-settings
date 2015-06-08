@@ -1,0 +1,15 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"ConvertToUTF8",
+		"IMESupport",
+		"Package Control",
+		"R-Box",
+		"Theme - Cobalt2",
+		"Theme - Flatland",
+		"Vintageous"
+	]
+}
