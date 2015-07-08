@@ -2,11 +2,12 @@
     "color_scheme": "Packages/User/ShitakeDarkPastel.tmTheme",
     "theme": "Cobalt2.sublime-theme",
     "font_size": 11,
+    "tab_size": 2,
     "ignored_packages":
     [
     ],
 
-    // 
+    //
     // サイドバーのフォルダ名を太字
     "bold_folder_labels": true,
 

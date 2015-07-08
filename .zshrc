@@ -156,6 +156,7 @@ if which pyenv > /dev/null; then
     eval "$(pyenv init -)";
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH=$HOME/Documents/shellscripts:$PATH
