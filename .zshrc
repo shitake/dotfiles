@@ -46,11 +46,17 @@ export LS_COLORS='di=34:on=35:so=32:pi33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;
 # Prompt
 # ------------------------------
 # test
+autoload -Uz vcs_info
 setopt prompt_subst
+
+zstyle ':vcs_info:*' formats '%F{white}%b%f'
+zstyle ':vcs_info:*' actionformats '%F{white}%b%f(%fF{red}%a%f)'
+precmd() { vcs_info }
+
 # PROMPT='${fg[white]}%(5~,%-2~/.../%2~,%~)% ${RED} $ ${RESET}'
 # PROMPT='[%n] %{${fg[yellow]}%}%~%{${reset_color}%}
 
-PROMPT='%1(v|%F${GREEN}%1v%2v%f|)%B${vcs_info_git_pushed}%b${RESET}${WHITE}[${GREEN}%B%(5~,%-2~/.../%2~,%~)% ${WHITE}%b]${WINDOW:+"[$WINDOW]"}${RESET} %(?.%{$fg[yellow]%}.%{$fg[cyan]%})%(?.%B(*ﾟーﾟ) <%b.%B(;ﾟーﾟ%)? <%b)%{${reset_color}%} '
+PROMPT='%1(v|%F${GREEN}%1v%2v%f|)%B${vcs_info_git_pushed}%b${RESET}${WHITE}[${GREEN}%B%(5~,%-2~/.../%2~,%~)% ${WHITE}%b](${vcs_info_msg_0_})${WINDOW:+"[$WINDOW]"}${RESET} %(?.%{$fg[yellow]%}.%{$fg[cyan]%})%(?.%B(*ﾟーﾟ) <%b.%B(;ﾟーﾟ%)? <%b)%{${reset_color}%} '
 SPROMPT='%{$fg[magenta]%}%{$suggest%}%B(;ﾟーﾟ)...もしかして%b %B%r%b %B%{$fg[magenta]%}? [そうだよ(y), ちがうよ(n), a, e]:${reset_color}'
 
 # 右プロンプト
