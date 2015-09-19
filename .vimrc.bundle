@@ -3,7 +3,6 @@ if has('vim_starting')
 endif
 
 call neobundle#begin(expand('~/dotfiles/vimfiles/bundle'))
-call neobundle#end()
 " manage
 NeoBundleFetch 'Shougo/neobundle.vim'
 
@@ -105,3 +104,5 @@ NeoBundle 'kchmck/vim-coffee-script'
 filetype plugin on
 
 NeoBundleCheck
+
+call neobundle#end()
