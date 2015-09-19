@@ -79,9 +79,9 @@ augroup auto_comment_off
 augroup END
 
 " ---------- インデント ----------
-set autoindent  " 有効化
+set autoindent
 set smartindent  " 新しい行開始時に，現在と同じだけインデント
-set cindent
+" set cindent  " 有効にすると，行頭に#を付けた際にインデントが無くなるので封印
 
 " Shift-Tab で unindent
 inoremap <S-Tab> <C-o><<
