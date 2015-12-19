@@ -14,47 +14,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " 以下plugin一覧
 " ------------------------------
 
-" neocomplete, neocomplcache
-" if_luaが有効ならneocompleteを使う
+" luaが有効ならneocompleteを使う
 NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'  " neocomplete使うとdjangoいじるとき落ちる neocomplcacheでも落ちる!!
-
-if neobundle#is_installed('neocomplete')
-    " neocomplete用設定
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_ignore_case = 1
-    let g:neocomplete#enable_smart_case = 1
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns._ = '\h\w*'
-elseif neobundle#is_installed('neocomplcache')
-    " neocomplcache用設定
-    let g:neocomplcache_enable_at_startup = 1
-    let g:neocomplcache_enable_ignore_case = 1
-    let g:neocomplcache_enable_smart_case = 1
-    if !exists('g:neocomplcache_keyword_patterns')
-        let g:neocomplcache_keyword_patterns = {}
-    endif
-    let g:neocomplcache_keyword_patterns._ = '\h\w*'
-    let g:neocomplcache_enable_camel_case_completion = 1
-    let g:neocomplcache_enable_underbar_completion = 1
-endif
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-" neocomplcache用設定
-NeoBundle 'Shougo/neocomplcache'
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_ignore_case = 1
-let g:neocomplcache_enable_smart_case = 1
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns._ = '\h\w*'
-let g:neocomplcache_enable_camel_case_completion = 1
-let g:neocomplcache_enable_underbar_completion = 1
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 " vim-easymotion
 NeoBundle 'haya14busa/vim-easymotion'
@@ -105,6 +66,41 @@ NeoBundle 'tpope/vim-endwise'
 NeoBundle 'kchmck/vim-coffee-script'
 
 NeoBundleCheck
+
+
+" ------------------------------
+" neocomplete.vim
+" ------------------------------
+let g:acp_enableAtStartup = 0
+
+if neobundle#is_installed('neocomplete')
+    " neocomplete用設定
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_ignore_case = 1
+    let g:neocomplete#enable_smart_case = 1
+    if !exists('g:neocomplete#force_omni_input_patterns')
+      let g:neocomplete#force_omni_input_patterns = {}
+      let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
+    endif
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns._ = '\h\w*'
+elseif neobundle#is_installed('neocomplcache')
+    " neocomplcache用設定
+    let g:neocomplcache_enable_at_startup = 1
+    let g:neocomplcache_enable_ignore_case = 1
+    let g:neocomplcache_enable_smart_case = 1
+    if !exists('g:neocomplcache_keyword_patterns')
+        let g:neocomplcache_keyword_patterns = {}
+    endif
+    let g:neocomplcache_keyword_patterns._ = '\h\w*'
+    let g:neocomplcache_enable_camel_case_completion = 1
+    let g:neocomplcache_enable_underbar_completion = 1
+endif
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
 
 call neobundle#end()
 
