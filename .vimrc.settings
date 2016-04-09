@@ -1,5 +1,10 @@
 set runtimepath^=~/dotfiles/vimfiles
 
+if executable("pyenv")
+  let $PATH = "~/.pyenv/shims:".$PATH
+  let $PATH = system("pyenv root")[:-2]."/shims:".$PATH
+endif
+
 set clipboard=unnamed                               " クリップボード使用
 set whichwrap=b,s,h,l,<,>,[,]                       " カーソルが行頭，行末で止まらないようにする
 set showcmd                                         " コマンドをステータス行に表示
@@ -71,6 +76,12 @@ nnoremap <silent> [Tag]j <C-w>j
 nnoremap <silent> [Tag]k <C-w>k
 nnoremap <silent> [Tag]l <C-w>l
 
+" ctags
+" nnoremap [Tag]] :exe("tjump ".expand('<cword>'))<CR>  " タグジャンプ
+nnoremap [Tag]] :tag<CR>                              " tag stack を進む
+nnoremap [Tag][ :pop<CR>                              " tag stack を戻る
+nnoremap [Tag]s :ts<CR>                               " tag list を表示
+
 " コメントの自動挿入を無効
 augroup auto_comment_off
     autocmd!
@@ -101,6 +112,7 @@ if has("autocmd")
     autocmd FileType ruby       setlocal sw=2 sts=2 ts=2 et
     autocmd FileType eruby      setlocal sw=2 sts=2 ts=2 et
     autocmd FileType coffee     setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType sh         setlocal sw=2 sts=2 ts=2 et
 endif
 
 " set noexpandtab  " ソフトTab(タブの代わりにスペースを入れる)をOFFにする
@@ -128,7 +140,7 @@ filetype off
 " ジャンプ用キー変更
 let g:EasyMotion_keys='hjklasdfgyuiopqwertnmvcxzbHJKLASDFGYUIOPQWERTNMVCXZB'
 " <Leader>を ; に割当
-let g:EasyMotion_leader_key=';'
+" let g:EasyMotion_leader_key=';'
 " smartcase 大文字小文字無視
 let g:EasyMotion_smartcase=1
 " 双方向検索 <Leader>なしでs使えるようにした
@@ -147,6 +159,7 @@ let g:lightline = {
             \ 'active': {
             \   'left': [
             \     ['mode', 'paste'],
+            \     ['pyenv'],
             \     ['fugitive', 'gitgutter', 'filename'],
             \   ],
             \   'right': [
@@ -167,6 +180,7 @@ let g:lightline = {
             \   'syntastic': 'SyntasticStatuslineFlag',
             \   'charcode': 'MyCharCode',
             \   'gitgutter': 'MyGitGutter',
+            \   'pyenv': 'pyenv#statusline#component',
             \ },
             \ 'separator': {'left': "\u2b80", 'right': "\u2b82"},
             \ 'subseparator': {'left': "\u2b81", 'right': "\u2b83"}
@@ -177,7 +191,7 @@ function! MyModified()
 endfunction
 
 function! MyReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '>' : ''
 endfunction
 
 function! MyFilename()
@@ -253,5 +267,13 @@ augroup END
 autocmd BufRead, BufNewFile, BufReadPre *.coffee set filetype=coffee
 autocmd BufWritePost *.coffee silent make!
 nnoremap <silent> <C-C> :CoffeeCompile vert <CR><C-w>h
+
+" ------------------------------
+" NERDTree
+" ------------------------------
+nnoremap [SideBar] <Nop>
+nmap <C-b> [SideBar]
+nnoremap [SideBar]k :NERDTreeToggle<CR>
+nnoremap [SideBar]<C-k> :NERDTreeToggle<CR>
 
 filetype plugin on  " ファイルタイプ判定on

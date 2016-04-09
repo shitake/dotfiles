@@ -1,3 +1,5 @@
 vimfiles/bundle
+*.vim~
+*/vim.un~
 
 vim_startuptime.txt
