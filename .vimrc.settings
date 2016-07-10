@@ -1,5 +1,10 @@
 set runtimepath^=~/dotfiles/vimfiles
 
+if executable("pyenv")
+  let $PATH = "~/.pyenv/shims:".$PATH
+  let $PATH = system("pyenv root")[:-2]."/shims:".$PATH
+endif
+
 set clipboard=unnamed                               " クリップボード使用
 set whichwrap=b,s,h,l,<,>,[,]                       " カーソルが行頭，行末で止まらないようにする
 set showcmd                                         " コマンドをステータス行に表示
@@ -20,6 +25,7 @@ set scrolloff=5                                     " スクロール時の余�
 set ignorecase                                      " 大文字小文字無視
 set smartcase                                       " 検索文字列に大文字が含まれている場合は区別
 set incsearch                                       " インクリメンタルサーチ
+set backspace=indent,eol,start                      " 文字削除可
 
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -71,6 +77,12 @@ nnoremap <silent> [Tag]j <C-w>j
 nnoremap <silent> [Tag]k <C-w>k
 nnoremap <silent> [Tag]l <C-w>l
 
+" ctags
+" nnoremap [Tag]] :exe("tjump ".expand('<cword>'))<CR>  " タグジャンプ
+nnoremap [Tag]] :tag<CR>                              " tag stack を進む
+nnoremap [Tag][ :pop<CR>                              " tag stack を戻る
+nnoremap [Tag]s :ts<CR>                               " tag list を表示
+
 " コメントの自動挿入を無効
 augroup auto_comment_off
     autocmd!
@@ -81,7 +93,7 @@ augroup END
 " ---------- インデント ----------
 set autoindent
 set smartindent  " 新しい行開始時に，現在と同じだけインデント
-" set cindent  " 有効にすると，行頭に#を付けた際にインデントが無くなるので封印
+set cindent  " 行頭に#を付けた際にインデントが無くなる場合がある
 
 " Shift-Tab で unindent
 inoremap <S-Tab> <C-o><<
@@ -129,7 +141,7 @@ filetype off
 " ジャンプ用キー変更
 let g:EasyMotion_keys='hjklasdfgyuiopqwertnmvcxzbHJKLASDFGYUIOPQWERTNMVCXZB'
 " <Leader>を ; に割当
-let g:EasyMotion_leader_key=';'
+" let g:EasyMotion_leader_key=';'
 " smartcase 大文字小文字無視
 let g:EasyMotion_smartcase=1
 " 双方向検索 <Leader>なしでs使えるようにした
@@ -148,6 +160,7 @@ let g:lightline = {
             \ 'active': {
             \   'left': [
             \     ['mode', 'paste'],
+            \     ['pyenv'],
             \     ['fugitive', 'gitgutter', 'filename'],
             \   ],
             \   'right': [
@@ -168,6 +181,7 @@ let g:lightline = {
             \   'syntastic': 'SyntasticStatuslineFlag',
             \   'charcode': 'MyCharCode',
             \   'gitgutter': 'MyGitGutter',
+            \   'pyenv': 'pyenv#statusline#component',
             \ },
             \ 'separator': {'left': "\u2b80", 'right': "\u2b82"},
             \ 'subseparator': {'left': "\u2b81", 'right': "\u2b83"}
@@ -178,7 +192,7 @@ function! MyModified()
 endfunction
 
 function! MyReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+  return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '>' : ''
 endfunction
 
 function! MyFilename()
@@ -239,6 +253,12 @@ function! MyGitGutter()
 endfunction
 
 " ------------------------------
+" vim-tags
+" ------------------------------
+let g:vim_tags_project_tags_command = "/usr/local/bin/ctags -R {OPTIONS} {DIRECTORY} 2>/dev/null"
+let g:vim_tags_gems_tags_command = "/usr/local/bin/ctags -R {OPTIONS} `bundle show --paths` 2>/dev/null"
+
+" ------------------------------
 " previm
 " ------------------------------
 augroup PrevimSettings
@@ -254,5 +274,14 @@ augroup END
 autocmd BufRead, BufNewFile, BufReadPre *.coffee set filetype=coffee
 autocmd BufWritePost *.coffee silent make!
 nnoremap <silent> <C-C> :CoffeeCompile vert <CR><C-w>h
+
+" ------------------------------
+" NERDTree
+" ------------------------------
+nnoremap [SideBar] <Nop>
+nmap <C-b> [SideBar]
+nnoremap [SideBar]k :NERDTreeToggle<CR>
+nnoremap [SideBar]<C-k> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1  " 隠しファイル表示
 
 filetype plugin on  " ファイルタイプ判定on

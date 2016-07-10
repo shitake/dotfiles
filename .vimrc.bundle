@@ -15,58 +15,107 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " ------------------------------
 
 " luaが有効ならneocompleteを使う
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'  " neocomplete使うとdjangoいじるとき落ちる neocomplcacheでも落ちる!!
+NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
 
-" vim-easymotion
-NeoBundle 'haya14busa/vim-easymotion'
-
-" vim-powerline
-" NeoBundle 'Lokaltog/vim-powerline'
-
-" lightline.vim
-NeoBundle 'itchyny/lightline.vim'
-
-" jedi-vim
-NeoBundle 'davidhalter/jedi-vim'
-
-" unite.vim
 NeoBundle 'Shougo/unite.vim'
 
-" emmet-vim
-NeoBundle 'mattn/emmet-vim'
+NeoBundle 'Shougo/unite-outline'
 
-" vim-markdown
-NeoBundle 'plasticboy/vim-markdown'
+NeoBundle 'Shougo/neosnippet.vim'
 
-" previm
-NeoBundle 'kannokanno/previm'
+NeoBundle 'Shougo/neosnippet-snippets'
 
-" open-browser.vim
-NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'kana/vim-smartinput'
 
-" tpope/vim-fugitive
-NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'kana/vim-operator-user'
 
-" NERDTree
+NeoBundle 'kana/vim-textobj-user'
+
 NeoBundle 'scrooloose/nerdtree'
 
-" marcus/rsense
-NeoBundle 'marcus/rsense'
-
-" scrooloose/syntastic
-NeoBundle 'scrooloose/syntastic'
-
-" szw/vim-tags
 NeoBundle 'szw/vim-tags'
 
-" tpope/vim-endwise
+NeoBundle 'haya14busa/vim-easymotion'
+
+" NeoBundle 'Lokaltog/vim-powerline'
+
+NeoBundle 'itchyny/lightline.vim'
+
+NeoBundle 'thinca/vim-quickrun'
+
+
+NeoBundle 'davidhalter/jedi-vim'
+
+NeoBundle 'hynek/vim-python-pep8-indent'
+
+NeoBundle 'andviro/flake8-vim'
+
+NeoBundle 'mattn/emmet-vim'
+
+NeoBundle 'plasticboy/vim-markdown'
+
+NeoBundle 'kannokanno/previm'
+
+NeoBundle 'tyru/open-browser.vim'
+
+NeoBundle 'tpope/vim-fugitive'
+
+NeoBundle 'marcus/rsense'
+
+NeoBundle 'scrooloose/syntastic'
+
 NeoBundle 'tpope/vim-endwise'
 
-" kchmck/vim-coffee-script
 NeoBundle 'kchmck/vim-coffee-script'
+
+NeoBundleLazy 'lambdalisue/vim-django-support', {
+      \ 'autoload': {
+      \   'filetypes': ['python', 'python3']
+      \ }}
+
+NeoBundleLazy 'lambdalisue/vim-pyenv', {
+      \ 'depends': ['davidhalter/jedi-vim'],
+      \ 'autoload': {
+      \   'filetypes': ['python',  'python3'],
+      \ }}
 
 NeoBundleCheck
 
+" ------------------------------
+" jedi-vim
+" ------------------------------
+autocmd FileType python setlocal omnifunc=jedi#completions
+
+let g:jedi#auto_vim_configuration = 0
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+
+" docstring を非表示
+autocmd FileType python setlocal completeopt-=preview
+
+" ------------------------------
+" vim-pyenv
+" ------------------------------
+" if jedi#init_python()
+"   function! s:jedi_auto_force_py_version() abort
+"     let major_version = pyenv#python#get_internal_major_version()
+"     call jedi#force_py_version(major_version)
+"   endfunction
+"   augroup vim-pyenv-custom-augroup
+"     autocmd! *
+"     autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
+"     autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+"   augroup END
+" endif
+
+" ------------------------------
+" syntastic
+" ------------------------------
+let g:syntastic_python_checkers = ["flake8"]
 
 " ------------------------------
 " neocomplete.vim
