@@ -275,5 +275,6 @@ nnoremap [SideBar] <Nop>
 nmap <C-b> [SideBar]
 nnoremap [SideBar]k :NERDTreeToggle<CR>
 nnoremap [SideBar]<C-k> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1  " 隠しファイル表示
 
 filetype plugin on  " ファイルタイプ判定on
