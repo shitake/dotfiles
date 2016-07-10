@@ -25,6 +25,7 @@ set scrolloff=5                                     " スクロール時の余�
 set ignorecase                                      " 大文字小文字無視
 set smartcase                                       " 検索文字列に大文字が含まれている場合は区別
 set incsearch                                       " インクリメンタルサーチ
+set backspace=indent,eol,start                      " 文字削除可
 
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -92,7 +93,7 @@ augroup END
 " ---------- インデント ----------
 set autoindent
 set smartindent  " 新しい行開始時に，現在と同じだけインデント
-" set cindent  " 有効にすると，行頭に#を付けた際にインデントが無くなるので封印
+set cindent  " 行頭に#を付けた際にインデントが無くなる場合がある
 
 " Shift-Tab で unindent
 inoremap <S-Tab> <C-o><<

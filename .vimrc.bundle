@@ -94,6 +94,9 @@ endif
 
 let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
+" docstring を非表示
+autocmd FileType python setlocal completeopt-=preview
+
 " ------------------------------
 " vim-pyenv
 " ------------------------------
