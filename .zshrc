@@ -57,7 +57,7 @@ precmd() { vcs_info }
 # PROMPT='[%n] %{${fg[yellow]}%}%~%{${reset_color}%}
 
 PROMPT='%1(v|%F${GREEN}%1v%2v%f|)%B${vcs_info_git_pushed}%b${RESET}${WHITE}[${GREEN}%B%(5~,%-2~/.../%2~,%~)% ${WHITE}%b]${vcs_info_msg_0_}${WINDOW:+"[$WINDOW]"}${RESET} %(?.%{$fg[yellow]%}.%{$fg[cyan]%})%(?.%B(*'\''-'\'')<%b.%B(;'\''-'\''%)?<%b)%{${reset_color}%} '
-SPROMPT='%{$fg[magenta]%}%{$suggest%}%B(;ﾟーﾟ)..もしかして%b %B%r%b %B%{$fg[magenta]%}? [そうだよ(y), ちがうよ(n), あぼーん(a), へんしゅう(e)]:${reset_color}'
+SPROMPT='%{$fg[magenta]%}%{$suggest%}%B(;'\''-'\''%)..もしかして%b %B%r%b %B%{$fg[magenta]%}? [そうだよ(y), ちがうよ(n), あぼーん(a), へんしゅう(e)]:${reset_color}'
 
 # 右プロンプト
 RPROMPT='%{${fg[green]}%}%B*%n%B*%b%m'
