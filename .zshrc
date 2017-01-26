@@ -165,4 +165,7 @@ fi
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH=$HOME/Documents/shellscripts:$PATH
+
+export PATH=/usr/local/opt/openssl/bin:$PATH
