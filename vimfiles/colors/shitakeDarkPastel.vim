@@ -32,7 +32,7 @@ hi Question          term=standout  cterm=bold  ctermfg=190 gui=bold  guifg=#d7f
 
 hi Visual                           ctermfg=51  ctermbg=239 guibg=black " 選択
 hi Search          cterm=NONE ctermfg=16 ctermbg=116 guifg=black  guibg=lightblue  " 検索
-hi MatchParen      term=reverse  ctermfg=16 ctermbg=199 guifg=#000000 guibg=#af005f  " 対応する括弧
+hi MatchParen      term=reverse  ctermfg=253 ctermbg=89 guifg=#000000 guibg=#af005f  " 対応する括弧
 
 hi Scrollbar      guifg=darkcyan guibg=cyan  " C G
 hi Menu              guifg=black guibg=seagreen  " C G
@@ -43,7 +43,7 @@ hi StatusLine      term=bold,reverse  cterm=bold " ctermfg=16 ctermbg=12 gui=bol
 hi StatusLineNC   term=reverse ctermfg=16 ctermbg=7 guifg=black guibg=lightgrey  " カレント以外 G C
 hi Title          term=bold  cterm=bold  ctermfg=1 gui=bold guifg=lightred  " html, markdownとかのタイトル, 見出しにあたる個所
 hi WarningMsg      term=standout  cterm=bold  ctermfg=1 guifg=lightred
-hi Cursor          ctermfg=15 ctermbg=113 guifg=white guibg=#75D05A  " カーソルの位置
+hi Cursor          ctermfg=15 ctermbg=197 guifg=white guibg=#75D05A  " カーソルの位置
 " hi CursorLine      term=underline  guibg=#555555 cterm=underline
 " hi CursorColumn      term=underline  guibg=#555555 cterm=underline
 hi Error          term=reverse cterm=bold ctermfg=37  ctermbg=16 gui=bold guifg=#00A9A1 guibg=black
