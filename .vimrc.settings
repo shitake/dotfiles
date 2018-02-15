@@ -5,7 +5,7 @@ if executable("pyenv")
   let $PATH = system("pyenv root")[:-2]."/shims:".$PATH
 endif
 
-set clipboard=unnamed                               " クリップボード使用
+set clipboard=unnamedplus                           " クリップボード使用
 set whichwrap=b,s,h,l,<,>,[,]                       " カーソルが行頭，行末で止まらないようにする
 set showcmd                                         " コマンドをステータス行に表示
 set showmode                                        " 現在のモード表示
@@ -18,7 +18,6 @@ set listchars=tab:>.,trail:_,extends:>,precedes:<   " 不可視文字の表示�
 set display=uhex                                    " 印字不可能文字を16進数で表示
 set autoread                                        " 余所の更新を自動で更新
 set formatoptions=lmoq                              " テキスト整形オプション，マルチバイト系を追加
-set clipboard+=unnamed                              " OSのクリップボードを使う
 set ffs=unix,dos,mac                                " 改行文字
 set encoding=utf-8                                  " デフォルトエンコーディング
 set scrolloff=5                                     " スクロール時の余白確保
