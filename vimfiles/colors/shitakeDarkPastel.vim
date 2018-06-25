@@ -86,3 +86,10 @@ augroup END
 hi clear CursorLine
 " hi CursorLine gui=underline
 highlight CursorLine ctermbg=237 guibg=#262024
+
+" 背景透過
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
+highlight Folded ctermbg=none
+highlight EndOfBuffer ctermbg=none
