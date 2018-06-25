@@ -135,6 +135,9 @@ compinit
 # 入力時に大文字小文字を区別せず補完
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|{-_.}=**'
 
+# Docker
+alias dps="docker ps --format '{{.ID}}    {{.Names}}'"
+
 # ------------------------------
 # utility
 # ------------------------------
