@@ -1,14 +1,29 @@
 filetype off
 
-if has('vim_starting')
-  set runtimepath+=~/dotfiles/vimfiles/bundle/neobundle.vim
+"NeoBundle Scripts-----------------------------
+if &compatible
+    set nocompatible               " Be iMproved
 endif
 
-call neobundle#begin(expand('~/dotfiles/vimfiles/bundle'))
+" Required:
+set runtimepath+=~/.vim/bundle/neobundle.vim/
 
-" manage
+" Required:
+call neobundle#begin(expand('~/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+
+" You can specify revision/branch/tag.
+NeoBundle 'Shougo/vimshell',  { 'rev' : '3787e5' }
 
 " ------------------------------
 " 以下plugin一覧
@@ -150,8 +165,15 @@ endif
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
-
+" Required:
 call neobundle#end()
 
+" Required:
 filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
+
 syntax on
