@@ -88,12 +88,6 @@ NeoBundleLazy 'lambdalisue/vim-django-support', {
       \   'filetypes': ['python', 'python3']
       \ }}
 
-NeoBundleLazy 'lambdalisue/vim-pyenv', {
-      \ 'depends': ['davidhalter/jedi-vim'],
-      \ 'autoload': {
-      \   'filetypes': ['python',  'python3'],
-      \ }}
-
 NeoBundleCheck
 
 " ------------------------------
@@ -111,21 +105,6 @@ let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 " docstring を非表示
 autocmd FileType python setlocal completeopt-=preview
-
-" ------------------------------
-" vim-pyenv
-" ------------------------------
-" if jedi#init_python()
-"   function! s:jedi_auto_force_py_version() abort
-"     let major_version = pyenv#python#get_internal_major_version()
-"     call jedi#force_py_version(major_version)
-"   endfunction
-"   augroup vim-pyenv-custom-augroup
-"     autocmd! *
-"     autocmd User vim-pyenv-activate-post   call s:jedi_auto_force_py_version()
-"     autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
-"   augroup END
-" endif
 
 " ------------------------------
 " syntastic
