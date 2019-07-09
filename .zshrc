@@ -138,6 +138,12 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|{-_.}=**'
 # Docker
 alias dps="docker ps --format '{{.ID}}    {{.Names}}'"
 
+alias d='docker'
+alias g='git'
+alias x='exa -lah'
+alias b='bat'
+alias sul='/usr/bin/subl'
+
 # ------------------------------
 # utility
 # ------------------------------
