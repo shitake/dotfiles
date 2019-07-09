@@ -165,6 +165,14 @@ endif
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
+" ------------------------------
+" fzf
+" ------------------------------
+set rtp+=/usr/local/opt/fzf
+
+
+" ============================================================
+
 " Required:
 call neobundle#end()
 
