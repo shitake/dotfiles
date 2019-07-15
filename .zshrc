@@ -135,10 +135,13 @@ compinit
 # 入力時に大文字小文字を区別せず補完
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|{-_.}=**'
 
-# Docker
+# ---------- Docker ----------
+alias d='docker'
+# Docker lint
+#   Usage: $ dl < Dockerfile
+alias dl='docker run --rm -i hadolint/hadolint'
 alias dps="docker ps --format '{{.ID}}    {{.Names}}'"
 
-alias d='docker'
 alias g='git'
 alias x='exa -lah'
 alias b='bat'
