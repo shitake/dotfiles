@@ -181,3 +181,5 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH=$HOME/Documents/shellscripts:$PATH
 
 export PATH=/usr/local/opt/openssl/bin:$PATH
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
