@@ -183,3 +183,6 @@ export PATH=$HOME/Documents/shellscripts:$PATH
 export PATH=/usr/local/opt/openssl/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# direnv
+eval "$(direnv hook zsh)"
