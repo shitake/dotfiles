@@ -137,6 +137,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|{-_.}=**'
 
 # ---------- Docker ----------
 alias d='docker'
+alias dc='docker-compose'
 # Docker lint
 #   Usage: $ dl < Dockerfile
 alias dl='docker run --rm -i hadolint/hadolint'
