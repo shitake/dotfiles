@@ -138,9 +138,10 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|{-_.}=**'
 # ---------- Docker ----------
 alias d='docker'
 alias dc='docker-compose'
+alias dl='docker container ls'
 # Docker lint
-#   Usage: $ dl < Dockerfile
-alias dl='docker run --rm -i hadolint/hadolint'
+#   Usage: $ dli < Dockerfile
+alias dli='docker run --rm -i hadolint/hadolint'
 alias dps="docker ps --format '{{.ID}}    {{.Names}}'"
 
 alias g='git'
