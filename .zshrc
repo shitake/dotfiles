@@ -162,6 +162,12 @@ alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"
 
 alias sul='/usr/bin/subl'
 
+# tmuxinator
+alias mux='tmuxinator'
+
+# Repositories
+alias repos='ghq list -p | fzf'
+
 export RBENV_ROOT=/usr/local/var/rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
 
