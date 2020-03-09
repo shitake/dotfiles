@@ -138,6 +138,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|{-_.}=**'
 # ---------- Docker ----------
 alias d='docker'
 alias dc='docker-compose'
+alias di='docker images'
 alias dl='docker container ls'
 # Docker lint
 #   Usage: $ dli < Dockerfile
