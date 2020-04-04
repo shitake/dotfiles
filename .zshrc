@@ -150,6 +150,9 @@ alias x='exa -lah'
 alias b='bat'
 alias sul='/usr/bin/subl'
 
+# Terraform
+alias tf='terraform'
+
 # ------------------------------
 # utility
 # ------------------------------
