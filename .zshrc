@@ -145,13 +145,15 @@ alias dl='docker container ls'
 alias dli='docker run --rm -i hadolint/hadolint'
 alias dps="docker ps --format '{{.ID}}    {{.Names}}'"
 
+# Terraform
+alias tf='terraform'
+# tmuxinator
+alias mux='tmuxinator'
+
 alias g='git'
 alias x='exa -lah'
 alias b='bat'
 alias sul='/usr/bin/subl'
-
-# Terraform
-alias tf='terraform'
 
 # ------------------------------
 # utility
@@ -163,11 +165,6 @@ alias ctags='/usr/local/bin/ctags'  # homebrewで入れたctagsへのエイリ�
 # vimらの
 alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-
-alias sul='/usr/bin/subl'
-
-# tmuxinator
-alias mux='tmuxinator'
 
 # Repositories
 alias repos='ghq list -p | fzf'
