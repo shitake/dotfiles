@@ -145,6 +145,12 @@ alias dl='docker container ls'
 alias dli='docker run --rm -i hadolint/hadolint'
 alias dps="docker ps --format '{{.ID}}    {{.Names}}'"
 
+function d-exec() {
+    local container
+    container=`docker container ls --format '{{.Names}}' | fzf`
+    docker exec -it ${container} bash
+}
+
 # Terraform
 alias tf='terraform'
 # tmuxinator
