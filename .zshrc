@@ -196,8 +196,15 @@ export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH=$HOME/Documents/shellscripts:$PATH
 
 export PATH=/usr/local/opt/openssl/bin:$PATH
+export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# Starship
+eval "$(starship init zsh)"
+
+# Zoxide
+eval "$(zoxide init zsh)"
