@@ -155,7 +155,7 @@ format = '[ $symbol ($version) ]($style)'
 
 [gcloud]
 symbol = " "
-format = '[ $symbol($profile )(\($region\) )(\[$duration\] )]($style)'
+format = '[ $symbol($active )(\($region\) )(\[$duration\] )]($style)'
 style = "bg:#E0DE94"
 
 [git_branch]
