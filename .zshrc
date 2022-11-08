@@ -151,6 +151,24 @@ function d-exec() {
     docker exec -it ${container} bash
 }
 
+function d-stop() {
+    local container
+    container=`docker container ls --format '{{.Names}}' | fzf`
+    docker stop ${container}
+}
+
+function d-start() {
+    local container
+    container=`docker container ls -a --format '{{.Names}}' | fzf`
+    docker start ${container}
+}
+
+function d-rm() {
+    local container
+    container=`docker container ls -a --format '{{.Names}}' | fzf`
+    docker rm -f ${container}
+}
+
 # Terraform
 alias tf='terraform'
 # tmuxinator
