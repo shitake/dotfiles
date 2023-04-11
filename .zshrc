@@ -190,6 +190,7 @@ alias ctags='/usr/local/bin/ctags'  # homebrewで入れたctagsへのエイリ�
 # vimらの
 alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+export EDITOR=vim
 
 # Repositories
 alias repos='ghq list -p | fzf'
