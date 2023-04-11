@@ -144,6 +144,7 @@ alias dl='docker container ls'
 #   Usage: $ dli < Dockerfile
 alias dli='docker run --rm -i hadolint/hadolint'
 alias dps="docker ps --format '{{.ID}}    {{.Names}}'"
+alias kc='kubectl'
 
 function d-exec() {
     local container
