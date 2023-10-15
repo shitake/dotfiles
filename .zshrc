@@ -170,6 +170,12 @@ function d-rm() {
     docker rm -f ${container}
 }
 
+function d-logs() {
+    local container
+    container=`docker container ls --format '{{.Names}}' | fzf`
+    docker logs ${container} -f
+}
+
 # Terraform
 alias tf='terraform'
 # tmuxinator
