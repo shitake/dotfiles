@@ -172,7 +172,7 @@ function d-rm() {
 
 function d-logs() {
     local container
-    container=`docker container ls --format '{{.Names}}' | fzf`
+    container=`docker container ls -a --format '{{.Names}}' | fzf`
     docker logs ${container} -f
 }
 
