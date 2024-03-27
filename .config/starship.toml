@@ -16,6 +16,7 @@ $hg_branch\
 [](fg:#FCA17D bg:#f0e68c)\
 $aws\
 $gcloud\
+$azure\
 [](fg:#E3D7A3 bg:#86BBD8)\
 $shlvl\
 $singularity\
@@ -68,7 +69,6 @@ $time\
 [ ](fg:#33658A)\
 $memory_usage\
 $openstack\
-$azure\
 $env_var\
 $crystal\
 $custom\
@@ -115,13 +115,24 @@ truncation_symbol = "…/"
 
 [aws]
 symbol = "🅰 "
-style = "bg:#E0DE94"
+style = "black bg:#E0DE94"
 format = '[ $symbol($profile )(\($region\) )(\[$duration\] )]($style)'
 
 [buf]
 symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
+
+[azure]
+disabled = false
+format = "[ $symbol($subscription) ]($style)"
+symbol = "󰠅 "
+style = "black bg:#E0DE94"
+
+[gcloud]
+symbol = " "
+format = '[ $symbol($active )(\($region\) )(\[$duration\] )]($style)'
+style = "black bg:#E0DE94"
 
 [c]
 symbol = " "
@@ -153,18 +164,13 @@ symbol = " "
 style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
-[gcloud]
-symbol = " "
-format = '[ $symbol($active )(\($region\) )(\[$duration\] )]($style)'
-style = "bg:#E0DE94"
-
 [git_branch]
 symbol = ""
-style = "bg:#FCA17D"
+style = "black bg:#FCA17D"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#FCA17D"
+style = "black bg:#FCA17D"
 format = '[$all_status$ahead_behind ]($style)'
 
 [golang]
