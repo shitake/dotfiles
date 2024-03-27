@@ -1,0 +1,11 @@
+font.size = 16
+font.normal.family = "CaskaydiaCove Nerd Font"
+
+colors.primary.foreground = "#ffffff"
+
+window.decorations = "Full"
+window.opacity = 0.85
+
+import = [
+    "~/.config/alacritty/themes/themes/catppuccin_mocha.toml"
+]
