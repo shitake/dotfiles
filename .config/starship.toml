@@ -115,7 +115,7 @@ truncation_symbol = "…/"
 
 [aws]
 symbol = "🅰 "
-style = "black bg:#E0DE94"
+style = "#ad3c3c bg:#E0DE94"
 format = '[ $symbol($profile )(\($region\) )(\[$duration\] )]($style)'
 
 [buf]
@@ -127,7 +127,7 @@ format = '[ $symbol ($version) ]($style)'
 disabled = false
 format = "[ $symbol($subscription) ]($style)"
 symbol = "󰠅 "
-style = "black bg:#E0DE94"
+style = "#4169e1 bg:#E0DE94"
 
 [gcloud]
 symbol = " "
