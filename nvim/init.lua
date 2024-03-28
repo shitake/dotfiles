@@ -43,6 +43,10 @@ vim.keymap.set('n', 'tj', '<C-w>j', { silent = true })
 vim.keymap.set('n', 'tk', '<C-w>k', { silent = true })
 vim.keymap.set('n', 'tl', '<C-w>l', { silent = true })
 
+-- Clipboard
+vim.opt.clipboard:append 'unnamedplus'
+-- vim.opt.clipboard:append 'unnamedplus'
+
 
 -- lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -100,3 +104,7 @@ require("nvim-tree").setup()
 --     dotfiles = true,
 --   },
 -- })
+
+
+-- telescope.nvim
+require('telescope')
