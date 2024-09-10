@@ -182,7 +182,7 @@ alias tf='terraform'
 alias mux='tmuxinator'
 
 alias g='git'
-alias x='exa -lah'
+alias x='eza -lah'
 alias b='bat'
 alias sul='/usr/bin/subl'
 
