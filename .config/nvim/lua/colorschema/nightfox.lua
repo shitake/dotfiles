@@ -46,6 +46,9 @@ require('nightfox').setup({
       bg3 = "#121820", -- 55% darkened from stock
       sel0 = "#131b24", -- 55% darkened from stock
     },
+    nordfox = {
+      sel0 = "#b865aa", -- Highlight
+    },
   },
   specs = {
     all = {
