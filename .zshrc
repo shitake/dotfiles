@@ -128,10 +128,6 @@ linux*)
     ;;
 esac
 
-# 補完
-autoload -U compinit
-compinit
-
 # 入力時に大文字小文字を区別せず補完
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|{-_.}=**'
 
@@ -186,9 +182,6 @@ alias x='eza -lah'
 alias b='bat'
 alias sul='/usr/bin/subl'
 
-# ------------------------------
-# utility
-# ------------------------------
 alias ql='qlmanage -p "$@" >& /dev/null'  # quicklook
 alias wifi='sh $HOME/Documents/shellscripts/wifi.sh'  # 無線LANのスキャン
 alias ctags='/usr/local/bin/ctags'  # homebrewで入れたctagsへのエイリアスのはず
@@ -198,26 +191,50 @@ alias ctags='/usr/local/bin/ctags'  # homebrewで入れたctagsへのエイリ�
 # alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 alias vim='env LANG=ja_JP.UTF-8 /usr/local/bin/nvim "$@"'
 alias n='env LANG=ja_JP.UTF-8 /usr/local/bin/nvim "$@"'
-export EDITOR=vim
+export EDITOR=nvim
 
 # Repositories
 alias repos='ghq list -p | fzf'
 
-export RBENV_ROOT=/usr/local/var/rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+# ------------------------------
+# Utility
+# ------------------------------
 
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH=${PYENV_ROOT}/bin:$PATH
-    eval "$(pyenv init -)"
+# 補完
+autoload -Uz compinit
+if [ -n "${ZDOTDIR:-}" ]; then
+  zcompdump="${ZDOTDIR}/.zcompdump"
+else
+  zcompdump="${HOME}/.zcompdump"
 fi
-if which pyenv > /dev/null; then
-    export PYENV_ROOT="${HOME}/.pyenv"
-    export PATH=${PYENV_ROOT}/shims:${PATH}
-    eval "$(pyenv init -)";
+if [[ -f "$zcompdump" && $(date -r "$zcompdump" +%s) -gt $(date -v-1d +%s) ]]; then
+  compinit -C
+else
+  compinit
 fi
 
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# Starship
+eval "$(starship init zsh)"
+
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Zoxide
+eval "$(zoxide init zsh)"
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+
+# direnv
+eval "$(direnv hook zsh)"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+
+# Google
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+
 
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -226,13 +243,23 @@ export PATH=$HOME/Documents/shellscripts:$PATH
 export PATH=/usr/local/opt/openssl/bin:$PATH
 export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
-# direnv
-eval "$(direnv hook zsh)"
+# ------------------------------
+# Temporary
+# ------------------------------
 
-# Starship
-eval "$(starship init zsh)"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=($HOME/.docker/completions $fpath)
 
-# Zoxide
-eval "$(zoxide init zsh)"
+# Kiro
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:$HOME/.lmstudio/bin"
+
+if [ ! -f ~/.uv_completion.zsh ]; then
+  uv generate-shell-completion zsh > ~/.uv_completion.zsh
+fi
+source ~/.uv_completion.zsh
