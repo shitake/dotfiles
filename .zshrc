@@ -1,3 +1,4 @@
+# zmodload zsh/zprof  # プロファイリング時のみ有効化
 export LANG=ja_JP.UTF-8
 export LESSCHARSET=utf-8
 
@@ -51,7 +52,8 @@ setopt prompt_subst
 
 zstyle ':vcs_info:*' formats '%F{blue}%b%f'
 zstyle ':vcs_info:*' actionformats '%F{blue}%b%f(%fF{red}%a%f)'
-precmd() { vcs_info }
+# starshipがgit表示を担うのでvcs_infoは不要
+# precmd() { vcs_info }
 
 # PROMPT='${fg[white]}%(5~,%-2~/.../%2~,%~)% ${RED} $ ${RESET}'
 # PROMPT='[%n] %{${fg[yellow]}%}%~%{${reset_color}%}
@@ -200,6 +202,21 @@ alias repos='ghq list -p | fzf'
 # Utility
 # ------------------------------
 
+# eval結果をキャッシュして起動高速化
+_cached_eval() {
+  local cache="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/${1##*/}.zsh"
+  local cmd_path="${commands[$1]}"
+  if [[ ! -f "$cache" ]] || [[ -n "$cmd_path" && "$cmd_path" -nt "$cache" ]]; then
+    mkdir -p "${cache:h}"
+    "$@" > "$cache"
+    zcompile "$cache"
+  fi
+  source "$cache"
+}
+
+# Docker CLI completions (compinit前に設定が必要)
+fpath=($HOME/.docker/completions $fpath)
+
 # 補完
 autoload -Uz compinit
 if [ -n "${ZDOTDIR:-}" ]; then
@@ -213,18 +230,45 @@ else
   compinit
 fi
 
-# Starship
-eval "$(starship init zsh)"
+_cached_eval starship init zsh --print-full-init
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Zoxide
-eval "$(zoxide init zsh)"
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+_cached_eval zoxide init zsh
+if command -v kubectl &>/dev/null; then
+  if [ ! -f ~/.kubectl_completion.zsh ]; then
+    kubectl completion zsh > ~/.kubectl_completion.zsh
+    zcompile ~/.kubectl_completion.zsh
+  fi
+  source ~/.kubectl_completion.zsh
+fi
 
-# direnv
-eval "$(direnv hook zsh)"
+if which rbenv > /dev/null; then eval "$(rbenv init - zsh)"; fi
+
+# pyenv: bash subprocess と rehash を避けた高速セットアップ
+if command -v pyenv &>/dev/null; then
+  export PYENV_SHELL=zsh
+  export PATH="${PYENV_ROOT}/shims:${PATH}"
+  typeset -U PATH  # PATH重複排除（zsh native）
+  local _pyenv_completions="${PYENV_ROOT}/completions/pyenv.zsh"
+  [[ -f "$_pyenv_completions" ]] && source "$_pyenv_completions"
+  pyenv() {
+    local command="${1:-}"
+    [[ "$#" -gt 0 ]] && shift
+    case "$command" in
+    rehash|shell)
+      eval "$(pyenv "sh-$command" "$@")"
+      ;;
+    *)
+      command pyenv "$command" "$@"
+      ;;
+    esac
+  }
+fi
+
+_cached_eval direnv hook zsh
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # Google
@@ -233,7 +277,10 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
+  [[ ! -f "$HOME/google-cloud-sdk/completion.zsh.inc.zwc" ]] && zcompile "$HOME/google-cloud-sdk/completion.zsh.inc"
+  . "$HOME/google-cloud-sdk/completion.zsh.inc"
+fi
 
 
 export PATH=$HOME/.nodebrew/current/bin:$PATH
@@ -244,22 +291,7 @@ export PATH=/usr/local/opt/openssl/bin:$PATH
 export PATH=/usr/local/opt/gnu-sed/libexec/gnubin:$PATH
 
 # Added by Antigravity
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+# export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
-# ------------------------------
-# Temporary
-# ------------------------------
-
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=($HOME/.docker/completions $fpath)
-
-# Kiro
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:$HOME/.lmstudio/bin"
-
-if [ ! -f ~/.uv_completion.zsh ]; then
-  uv generate-shell-completion zsh > ~/.uv_completion.zsh
-fi
-source ~/.uv_completion.zsh
+# ローカル設定・一時設定・機密情報（git管理外）
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

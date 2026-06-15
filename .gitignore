@@ -3,3 +3,6 @@ vimfiles/bundle
 */vim.un~
 
 vim_startuptime.txt
+
+# 機密情報（ローカルのみ）
+.zshrc.local
